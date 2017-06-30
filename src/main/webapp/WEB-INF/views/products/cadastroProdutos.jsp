@@ -7,7 +7,7 @@ uri="http://www.springframework.org/tags"%>
 <html>
     <head>
     <meta charset="UTF-8">
-    <title>Cadastro de produtos</title>
+    <title>Products</title>
     </head>
     <body>
 
