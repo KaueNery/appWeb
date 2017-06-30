@@ -1,0 +1,10 @@
+/home/knery/IdeaProjects/app/src/main/java/com/webApp/app/models/Price.java
+/home/knery/IdeaProjects/app/src/main/java/com/webApp/app/daos/ProductDAO.java
+/home/knery/IdeaProjects/app/src/main/java/com/webApp/app/validators/ProductValidator.java
+/home/knery/IdeaProjects/app/src/main/java/com/webApp/app/conf/ServletSpringMVC.java
+/home/knery/IdeaProjects/app/src/main/java/com/webApp/app/controllers/HomeController.java
+/home/knery/IdeaProjects/app/src/main/java/com/webApp/app/conf/AppWebConfiguration.java
+/home/knery/IdeaProjects/app/src/main/java/com/webApp/app/conf/JPAConfiguration.java
+/home/knery/IdeaProjects/app/src/main/java/com/webApp/app/models/BookType.java
+/home/knery/IdeaProjects/app/src/main/java/com/webApp/app/models/Product.java
+/home/knery/IdeaProjects/app/src/main/java/com/webApp/app/controllers/ProductsController.java

@@ -1,0 +1,10 @@
+com/webApp/app/models/Price.class
+com/webApp/app/conf/JPAConfiguration.class
+com/webApp/app/validators/ProductValidator.class
+com/webApp/app/conf/AppWebConfiguration.class
+com/webApp/app/conf/ServletSpringMVC.class
+com/webApp/app/models/BookType.class
+com/webApp/app/controllers/HomeController.class
+com/webApp/app/daos/ProductDAO.class
+com/webApp/app/controllers/ProductsController.class
+com/webApp/app/models/Product.class
