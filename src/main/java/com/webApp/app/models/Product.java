@@ -32,6 +32,14 @@ public class Product {
     @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
     private Calendar releaseDate;
 
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
+    }
+
     public Calendar getReleaseDate() {
         return releaseDate;
     }
