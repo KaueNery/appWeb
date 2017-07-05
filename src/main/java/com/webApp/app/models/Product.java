@@ -1,25 +1,29 @@
 package com.webApp.app.models;
-
-import org.hibernate.validator.constraints.NotBlank;
-import org.springframework.format.annotation.DateTimeFormat;
-
-import javax.persistence.*;
-import javax.validation.constraints.Min;
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 
-/**
- * Created by knery on 26/06/17.
- */
+import javax.persistence.ElementCollection;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Lob;
+import javax.validation.constraints.Min;
+import javax.xml.bind.annotation.XmlRootElement;
+
+import org.hibernate.validator.constraints.NotBlank;
+import org.springframework.format.annotation.DateTimeFormat;
+import org.springframework.format.annotation.DateTimeFormat.ISO;
 
 @Entity
+@XmlRootElement
 public class Product {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
-
     @NotBlank
     private String title;
     @Lob
@@ -29,15 +33,20 @@ public class Product {
     private int pages;
     @ElementCollection
     private List<Price> prices = new ArrayList<Price>();
-    @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
-    private Calendar releaseDate;
 
-    public Integer getId() {
-        return id;
+    // motivar que eu quero fazer uma configuração global suportando este estilo
+    // primeiro motiva que podemos criar um converter para isso.
+    // @DateTimeFormat(iso=ISO.DATE)
+    @DateTimeFormat
+    private Calendar releaseDate;
+    private String summaryPath;
+
+    public String getSummaryPath() {
+        return summaryPath;
     }
 
-    public void setId(Integer id) {
-        this.id = id;
+    public void setSummaryPath(String summaryPath) {
+        this.summaryPath = summaryPath;
     }
 
     public Calendar getReleaseDate() {
@@ -48,35 +57,57 @@ public class Product {
         this.releaseDate = releaseDate;
     }
 
+    public Integer getId() {
+        return id;
+    }
+
     public List<Price> getPrices() {
         return prices;
     }
 
-    public void setPrices(List<Price> prices) {
-        this.prices = prices;
+    public void setPrices(List<Price> valores) {
+        this.prices = valores;
     }
 
     public String getTitle() {
         return title;
     }
 
-    public void setTitle(String title) {
-        this.title = title;
+    public void setTitle(String titulo) {
+        this.title = titulo;
     }
 
     public String getDescription() {
         return description;
     }
 
-    public void setDescription(String description) {
-        this.description = description;
+    public void setDescription(String descricao) {
+        this.description = descricao;
     }
 
     public int getPages() {
         return pages;
     }
 
-    public void setPages(int pages) {
-        this.pages = pages;
+    public void setPages(int numeroPaginas) {
+        this.pages = numeroPaginas;
     }
+
+    @Override
+    public String toString() {
+        return "Produto [id=" + id + ", titulo=" + title + ", descricao="
+                + description + ", numeroPaginas=" + pages + ", valores="
+                + prices + "]";
+    }
+
+    public BigDecimal priceFor(BookType bookType) {
+
+        for(Price price : this.prices){
+            if (price.getBookType().equals(bookType)){
+                return price.getValue();
+            }
+        }
+        return null;
+    }
+
 }

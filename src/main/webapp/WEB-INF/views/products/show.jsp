@@ -11,6 +11,10 @@
         <title>Insert title here</title>
     </head>
     <body>
+        <ul>
+            <li><a href="/shopping" rel="nofollow">Cart (${shoppingCart.quantity})
+            </a></li>
+        </ul>
         <table>
             <tr><td>PRODUCT: </td><td>${product.title}</td><td>DESC:    ${product.description}</td></tr>
         </table>

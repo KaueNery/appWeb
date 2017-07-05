@@ -2,12 +2,14 @@ package com.webApp.app.conf;
 
 import com.webApp.app.controllers.HomeController;
 import com.webApp.app.daos.ProductDAO;
+import com.webApp.app.models.ShoppingCart;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.format.datetime.DateFormatter;
 import org.springframework.format.datetime.DateFormatterRegistrar;
 import org.springframework.format.support.DefaultFormattingConversionService;
 import org.springframework.format.support.FormattingConversionService;
+import org.springframework.web.client.RestTemplate;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import org.springframework.web.servlet.view.InternalResourceViewResolver;
 
@@ -16,7 +18,7 @@ import org.springframework.web.servlet.view.InternalResourceViewResolver;
  */
 
 @EnableWebMvc
-@ComponentScan(basePackageClasses={HomeController.class, ProductDAO.class})
+@ComponentScan(basePackageClasses={HomeController.class, ProductDAO.class, ShoppingCart.class})
 public class AppWebConfiguration {
 
     @Bean
@@ -40,5 +42,10 @@ public class AppWebConfiguration {
         registrar.setFormatter(new DateFormatter("yyyy-MM-dd"));
         registrar.registerFormatters(conversionService);
         return conversionService;
+    }
+
+    @Bean
+    public RestTemplate restTemplate(){
+        return new RestTemplate();
     }
 }
