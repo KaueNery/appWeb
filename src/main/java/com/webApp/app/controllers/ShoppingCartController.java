@@ -1,19 +1,19 @@
 package com.webApp.app.controllers;
 
 import com.webApp.app.daos.ProductDAO;
-import com.webApp.app.models.BookType;
-import com.webApp.app.models.Product;
-import com.webApp.app.models.ShoppingCart;
-import com.webApp.app.models.ShoppingItem;
+import com.webApp.app.models.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.client.HttpClientErrorException;
 import org.springframework.web.context.WebApplicationContext;
 import org.springframework.web.servlet.ModelAndView;
 
+import java.math.BigDecimal;
 import java.util.*;
+import java.util.concurrent.Callable;
 
 /**
  * Created by knery on 03/07/17.
@@ -52,6 +52,7 @@ public class ShoppingCartController {
         ShoppingItem item = new ShoppingItem(product,bookType);
         return item;
     }
+
 
 
 }

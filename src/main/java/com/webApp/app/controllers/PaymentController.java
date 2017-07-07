@@ -12,6 +12,7 @@ import org.springframework.web.client.RestTemplate;
 import org.springframework.web.context.WebApplicationContext;
 
 import java.math.BigDecimal;
+import java.util.concurrent.Callable;
 
 /**
  * Created by knery on 05/07/17.
@@ -27,20 +28,43 @@ public class PaymentController {
     @Autowired
     private RestTemplate restTemplate;
 
-    @RequestMapping(value="checkout",method= RequestMethod.POST)
-    public String checkout() {
+//    @RequestMapping(value="checkout",method= RequestMethod.POST)
+//    public String checkout() {
+//
+//        BigDecimal total = shoppingCart.getTotal();
+//
+//        String uriToPay = "http://book-payment.herokuapp.com/payment";
+//        try {
+//            String response = restTemplate.postForObject(uriToPay,new PaymentData(total), String.class);
+//            return "redirect:/payment/success";
+//        } catch (HttpClientErrorException exception) {
+//            return "redirect:/payment/error";
+//        }
+//
+//    }
 
-        BigDecimal total = shoppingCart.getTotal();
+    @RequestMapping(value = "checkout", method = RequestMethod.POST)
+    public Callable<String> checkout() {
 
-        String uriToPay = "http://book-payment.herokuapp.com/payment";
-        try {
-            String response = restTemplate.postForObject(uriToPay,new PaymentData(total), String.class);
-            return "redirect:/payment/success";
-        } catch (HttpClientErrorException exception) {
-            return "redirect:/payment/error";
-        }
+        return new Callable<String>() {
+            public String call() throws Exception {
 
+                BigDecimal total = shoppingCart.getTotal();
+                String uriToPay = "http://localhost:9000/payment";
+                try {
+
+                    String response = restTemplate.postForObject(uriToPay, new PaymentData(total), String.class);
+
+                    return "redirect:/payment/success";
+                } catch (HttpClientErrorException exception) {
+
+                    return "redirect:/payment/error";
+                }
+            }
+        };
     }
+
+
 
     @RequestMapping(value="/success")
     public String success(){

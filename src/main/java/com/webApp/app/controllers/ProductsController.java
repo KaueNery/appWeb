@@ -5,6 +5,8 @@ import com.webApp.app.models.BookType;
 import com.webApp.app.models.Product;
 import com.webApp.app.validators.ProductValidator;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.CacheEvict;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -60,6 +62,8 @@ public class ProductsController {
     }
 
     @RequestMapping(method=RequestMethod.GET)
+    @Cacheable(value = "books")
+    @CacheEvict(value = "books", allEntries = true)
     public ModelAndView list(){
 
         ModelAndView modelAndView = new ModelAndView("products/list");
